@@ -1,0 +1,263 @@
+@import "tailwindcss";
+
+/* ─── Design System Tokens ─── */
+@theme {
+  --color-bg-base: #0b0b0f;
+  --color-bg-elevated: #16161a;
+  --color-text-primary: #f5f0e8;
+  --color-text-secondary: #a0a0a8;
+  --color-accent-primary: #ff3b7c;
+  --color-accent-secondary: #f5c042;
+  --color-surface: rgba(255, 255, 255, 0.08);
+  --color-surface-hover: rgba(255, 255, 255, 0.14);
+  --color-surface-active: rgba(255, 255, 255, 0.2);
+  --color-overlay: rgba(0, 0, 0, 0.65);
+  --font-display: "Poppins", "Hind Siliguri", sans-serif;
+  --font-body: "Hind Siliguri", "Inter", sans-serif;
+}
+
+/* ─── Base Reset ─── */
+html {
+  background-color: #0b0b0f;
+  color: #f5f0e8;
+  -webkit-tap-highlight-color: transparent;
+  overscroll-behavior: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Hind Siliguri", "Inter", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+  height: 100dvh;
+  width: 100vw;
+}
+
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* ─── Utilities ─── */
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* ─── Gradient Overlays ─── */
+.feed-gradient-bottom {
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.85) 0%,
+    rgba(0, 0, 0, 0.5) 40%,
+    transparent 100%
+  );
+}
+.feed-gradient-top {
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.6) 0%,
+    transparent 100%
+  );
+}
+
+/* ─── Vinyl Disc ─── */
+@keyframes spin {
+  from { transform: translate3d(0,0,0) rotate(0deg); }
+  to { transform: translate3d(0,0,0) rotate(360deg); }
+}
+.animate-spin-slow {
+  animation: spin 4s linear infinite;
+  will-change: transform;
+}
+.animate-spin-paused {
+  animation-play-state: paused;
+}
+.vinyl-grooves::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.12);
+}
+.vinyl-grooves::before {
+  content: '';
+  position: absolute;
+  inset: 10px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* ─── Music Note Waveform (transform-based, GPU-accelerated) ─── */
+@keyframes music-bar {
+  0%, 100% { transform: scaleY(0.3); }
+  50% { transform: scaleY(1); }
+}
+.music-bar {
+  animation: music-bar 0.5s ease-in-out infinite;
+  transform-origin: bottom;
+  will-change: transform;
+}
+
+/* ─── Heart Burst ─── */
+@keyframes heart-burst {
+  0% { opacity: 0; transform: translate3d(0,0,0) scale(0); }
+  15% { opacity: 1; transform: translate3d(0,0,0) scale(1.1); }
+  30% { transform: translate3d(0,0,0) scale(1); }
+  100% { opacity: 0; transform: translate3d(0,0,0) scale(0.6) translateY(-120px); }
+}
+.animate-heart-burst {
+  animation: heart-burst 0.9s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+@keyframes heart-fly {
+  0% { opacity: 1; transform: translate3d(0,0,0) scale(1) rotate(0deg); }
+  100% { opacity: 0; transform: translate3d(var(--tx), var(--ty), 0) scale(0) rotate(30deg); }
+}
+.animate-heart-fly {
+  animation: heart-fly 0.7s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+/* ─── Like Spring ─── */
+@keyframes like-spring {
+  0% { transform: translate3d(0,0,0) scale(1); }
+  25% { transform: translate3d(0,0,0) scale(1.3); }
+  50% { transform: translate3d(0,0,0) scale(0.9); }
+  75% { transform: translate3d(0,0,0) scale(1.1); }
+  100% { transform: translate3d(0,0,0) scale(1); }
+}
+.animate-like-spring {
+  animation: like-spring 0.45s ease-out forwards;
+  will-change: transform;
+}
+
+/* ─── Pause Overlay ─── */
+@keyframes pause-fade-in {
+  from { opacity: 0; transform: translate3d(0,0,0) scale(0.8); }
+  to { opacity: 1; transform: translate3d(0,0,0) scale(1); }
+}
+.animate-pause-in {
+  animation: pause-fade-in 0.2s ease-out forwards;
+  will-change: transform, opacity;
+}
+
+/* ─── Tab Underline Slide ─── */
+@keyframes tab-underline {
+  from { width: 0; }
+  to { width: 20px; }
+}
+.animate-tab-underline {
+  animation: tab-underline 0.2s ease-out forwards;
+}
+
+/* ─── Skeleton shimmer ─── */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.04) 25%,
+    rgba(255, 255, 255, 0.1) 50%,
+    rgba(255, 255, 255, 0.04) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+/* ─── Video Progress Bar ─── */
+.video-progress {
+  transition: width 80ms linear;
+}
+
+/* ─── Music Disc Glow ─── */
+.disc-glow {
+  box-shadow: 0 0 12px rgba(255, 59, 124, 0.3);
+}
+
+/* ─── Profile Grid ─── */
+.profile-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+}
+
+/* ─── Verified Badge ─── */
+.verified-badge {
+  background: linear-gradient(135deg, #ff3b7c, #ff8a5c);
+}
+
+/* ─── Camera Shutter ─── */
+@keyframes shutter-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(255, 59, 124, 0.5); }
+  50% { box-shadow: 0 0 0 8px rgba(255, 59, 124, 0); }
+}
+.animate-shutter {
+  animation: shutter-pulse 2s ease-in-out infinite;
+}
+
+/* ─── Swipe Rubber Band ─── */
+.swipe-transition {
+  transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+}
+
+/* ─── Sheet Slide Up ─── */
+@keyframes sheet-up {
+  from { transform: translate3d(0, 100%, 0); }
+  to { transform: translate3d(0, 0, 0); }
+}
+.animate-sheet-up {
+  animation: sheet-up 0.35s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+  will-change: transform;
+}
+
+@keyframes sheet-down {
+  from { transform: translate3d(0, 0, 0); }
+  to { transform: translate3d(0, 100%, 0); }
+}
+
+/* ─── Blur Backdrop ─── */
+.backdrop-blur-xl {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+}
+
+/* ─── Volume Slider ─── */
+.volume-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 3px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.2);
+  outline: none;
+  cursor: pointer;
+}
+.volume-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: white;
+  cursor: pointer;
+  box-shadow: 0 0 6px rgba(0,0,0,0.3);
+}
+
+/* ─── Video Error Retry ─── */
+@keyframes spin-load {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+.animate-spin-load {
+  animation: spin-load 1s linear infinite;
+  will-change: transform;
+}
